@@ -12,6 +12,19 @@ struct Room {
      let width: Double
 }
 ```
+```
+struct Room {
+var maxOccupancy: Int = 4
+var length: Double = 12.0
+var width: Double = 12.0
+}
+
+var hiltonKingInTurks = Room(maxOccupancy: 6, length: 40.0, width: 90.0)
+
+print(hiltonKingInTurks)
+print(Room.init())
+
+```
 
 ## Question 2
 
@@ -22,6 +35,21 @@ class Bike {
     var wheelNumber = 2
     var hasBell = false
 }
+```
+```
+class Bike {
+var wheelNumber = 2
+var hasBell = false
+}
+
+class Mongoose: Bike{
+var size = 3.0
+var terrain = "mountain"
+}
+
+let mongoose = Mongoose()
+mongoose.hasBell
+
 ```
 
 ## Question 3
@@ -38,7 +66,30 @@ class Animal {
 ```
 
 b. Override the printDescription method to have the instance of the Bird object print out its name and whether it can fly
+```
+class Animal {
+var name: String = ""
+func printDescription(name: String) -> String {
+return "I am an animal named \(name)"
+}
+}
+//class  Bird : Animal {
+//    var canFly = true
+//}
+//
+//var newBird = Bird()
+//print(newBird.canFly)
+//b
+class  Bird : Animal {
+var canFly = true
+override func printDescription(name: String) -> String {
+return "This bird's name is \(name)  and can it fly? \(canFly) "
+}
+}
+var newBird = Bird()
+print(newBird.printDescription(name: "Adam"))
 
+```
 
 ## Question 4
 
@@ -59,6 +110,36 @@ class Bike {
 a. Create a `LoudBike` subclass of Bike.  When you call `ringBell` it should ring the bell in all caps.
 
 b. Give `LoudBike` a new method called `ringBell(times:)` that rings the bell a given number of times
+```
+class Bike {
+let wheelNumber = 2
+let wheelWidth = 1.3
+var hasBell = true
+func ringBell() {
+if hasBell {
+print("Ring!")
+}
+}
+}
+class  LoudAssBike : Bike {
+override func ringBell() {
+print("RINGGGGGGGG")
+}
+
+func ringBellTimes(xTimes: Int) {
+var countRing = 0
+while countRing < xTimes {
+print("RIIINNNGGGG")
+countRing += 1
+
+}
+
+}
+}
+var loudBike = LoudAssBike()
+print(loudBike.ringBellTimes(xTimes: 4))
+
+```
 
 
 ## Question 5
@@ -152,6 +233,60 @@ Hint: Given the radius of a circle and the x value of a point on the circle, the
 
 ```swift
 circleOne.contains(circleOne.getRandomPoint()) //Should always be true
+```
+```
+class Shape {
+var name: String { return "This is a generic shape" }
+var area: Double { fatalError("Subclasses must override the area") }
+var perimeter: Double { fatalError("Subclasses must override the perimeter") }
+}
+
+class Square: Shape{
+var sideLength = 5
+override var area: Double {
+get{
+return 25.0
+}
+}
+
+override var perimeter: Double {
+get{
+return 20
+}
+}
+
+override var name: String{
+get{
+return " square"
+}
+}
+
+}
+
+class Rectangle: Shape{
+var width = 4
+var height = 6
+
+override var name: String{
+get{
+return "rectangle"
+}
+}
+}
+var rect = Rectangle()
+
+print(rect.width)
+
+var myShapes = [Shape]()
+
+myShapes.append(Square())
+myShapes.append(Rectangle())
+
+for shape in myShapes {
+print("This is a \(shape.name) with an area of \(shape.area) and a perimeter of \(shape.perimeter)")
+}
+An array of the class Shape is created, we add the subclasses square and rectangle then do a for loop that iterates throught the shapes printing their attributes
+
 ```
 
 
